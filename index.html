@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        margin: 0%;
+        padding: 0%;
+      }
+
+      .main {
+        overflow: auto;
+        position: relative;
+      }
+
+      .main::before {
+        content: "";
+        position: fixed;
+        left: 0;
+        right: 0;
+        z-index: -1;
+
+        display: block;
+        background-image: url(../../Downloads/wallpaperflare.com_wallpaper.jpg);
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 100%;
+
+        -webkit-filter: blur(5px);
+        -moz-filter: blur(5px);
+        -o-filter: blur(5px);
+        -ms-filter: blur(5px);
+        filter: blur(2px);
+      }
+
+      h1 {
+        color: white;
+      }
+
+      label {
+        font-weight: bold;
+        font-size: 20px;
+      }
+
+      form {
+        width: 40%;
+        margin: auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        border: 2px solid red;
+      }
+
+      input[type="text"],
+      input[type="date"],
+      input[type="number"],
+      input[type="password"] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      button {
+        width: 140px;
+        background-color: #1718d4;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: 46%;
+        font-weight: bold;
+        font-size: 15px;
+      }
+
+      button:hover {
+        background-color: rgb(46, 112, 236);
+        color: white;
+      }
+    </style>
+  </head>
+  <script>
+    function validation() {
+      let Firstname = document.getElementById("Firstname").value;
+      let lastname = document.getElementById("lastname").value;
+      let datef = document.getElementById("Datef").value;
+      let Email = document.getElementById("Email").value;
+      let Password = document.getElementById("Password").value;
+      let Cpass = document.getElementById("C-pass").value;
+      let age = document.getElementById("age").value;
+      let number = document.getElementById("number").value;
+      let Address = document.getElementById("Add").value;
+
+      let firstcheck = /^[A-Za-z. ]{3,30}$/;
+      let lastcheck = /^[A-Za-z. ]{3,30}$/;
+      let Emailcheck = /^[A-Za-z0-9_]{3,}@[A-Za-z]{3,}[.]{1}[A-Za-z.]{2,6}$/;
+      let passwordcheck =
+        /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+      let Cpasscheck = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+      let agecheck = /^[1-9]?[0-9]{1}$|^100$/;
+      let numbercheck =
+        /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+      let Addresscheck = /^[#.0-9a-zA-Z\s,-]+$/;
+
+      if (Firstname == "") {
+        document.getElementById("formerror").innerHTML =
+          "** Enter Your First Name";
+        document.getElementById("Firstname").style.borderColor = "red";
+      } else if (!firstcheck.test(Firstname)) {
+        document.getElementById("formerror").innerHTML =
+          "** it should only contain letters";
+        document.getElementById("Firstname").style.borderColor = "red";
+      } else {
+        document.getElementById("formerror").innerHTML = "";
+        document.getElementById("Firstname").style.borderColor = "#ccc";
+      }
+
+      if (lastname == "") {
+        document.getElementById("formerror1").innerHTML =
+          "** Enter Your Last Name";
+        document.getElementById("lastname").style.borderColor = "red";
+      } else if (!lastcheck.test(lastname)) {
+        document.getElementById("formerror1").innerHTML =
+          "** it should only contain letters";
+        document.getElementById("lastname").style.borderColor = "red";
+      } else {
+        document.getElementById("formerror1").innerHTML = "";
+        document.getElementById("lastname").style.borderColor = "#ccc";
+      }
+
+      if (datef == "") {
+        document.getElementById("formerror2").innerHTML =
+          "** Enter the Birth Date";
+        document.getElementById("Datef").style.borderColor = "red";
+      } else {
+        let milisecond = Date.now() - new Date(datef).getTime();
+        let age = Math.floor(milisecond / 31557600000);
+
+        if (age < 18) {
+          document.getElementById("formerror2").innerHTML =
+            "** You must be 18 or Above";
+          document.getElementById("Datef").style.borderColor = "red";
+        } else {
+          document.getElementById("formerror2").innerHTML = "";
+          document.getElementById("Datef").style.borderColor = "#ccc";
+        }
+      }
+
+      if (Email == "") {
+        document.getElementById("formerror3").innerHTML =
+          "** Enter Your EmailAddress";
+        document.getElementById("Email").style.borderColor = "red";
+      } else if (!Emailcheck.test(Email)) {
+        document.getElementById("formerror3").innerHTML =
+          "** it should only contain Only EmailAddress";
+        document.getElementById("Email").style.borderColor = "red";
+      } else {
+        document.getElementById("formerror3").innerHTML = "";
+        document.getElementById("Email").style.borderColor = "#ccc";
+      }
+
+      if (Password == " ") {
+        document.getElementById("formerror4").innerHTML =
+          "** Enter Your Password";
+        document.getElementById("Password").style.borderColor = "red";
+      } else if (!passwordcheck.test(Password)) {
+        document.getElementById("formerror4").innerHTML =
+          "** Password Must be strong";
+        document.getElementById("Password").style.borderColor = "red";
+      } else {
+        document.getElementById("formerror4").innerHTML = "";
+        document.getElementById("Password").style.borderColor = "#ccc";
+      }
+
+      if (Cpass == "") {
+        document.getElementById("formerror5").innerHTML =
+          "** Enter Your Confirm Password";
+        document.getElementById("C-pass").style.borderColor = "red";
+      } else if (!Cpasscheck.test(Cpass)) {
+        document.getElementById("formerror5").innerHTML =
+          "** Password Must be strong";
+        document.getElementById("C-pass").style.borderColor = "red";
+      } else if (Password !== Cpass) {
+        document.getElementById("formerror5").innerHTML =
+          "** Enter Correct Password";
+      } else {
+        document.getElementById("formerror5").innerHTML = "";
+        document.getElementById("C-pass").style.borderColor = "#ccc";
+      }
+
+      if (age == "") {
+        document.getElementById("formerror6").innerHTML = "** Enter Your Age";
+        document.getElementById("age").style.borderColor = "red";
+        document.getElementById("age").style.borderColor = "red";
+      } else if (!agecheck.test(age)) {
+        document.getElementById("formerror6").innerHTML =
+          "** it should only contain number";
+        document.getElementById("age").style.borderColor = "red";
+      } else if (age > 18) {
+        document.getElementById("formerror6").innerHTML = "";
+        document.getElementById("age").style.borderColor = "#ccc";
+      } else {
+        document.getElementById("formerror6").innerHTML =
+          "** Age Must be above 18";
+        document.getElementById("age").style.borderColor = "red";
+      }
+
+      if (number == "") {
+        document.getElementById("formerror7").innerHTML =
+          "** Enter Your Mobile Number";
+        document.getElementById("number").style.borderColor = "red";
+      } else if (!numbercheck.test(number)) {
+        document.getElementById("formerror7").innerHTML =
+          "** it should only contain  10 Numbers";
+        document.getElementById("number").style.borderColor = "red";
+      } else {
+        document.getElementById("formerror7").innerHTML = "";
+        document.getElementById("number").style.borderColor = "#ccc";
+      }
+
+      if (Address == "") {
+        document.getElementById("formerror8").innerHTML =
+          "** Enter Your Address";
+        document.getElementById("Add").style.borderColor = "red";
+      } else if (!Addresscheck.test(Address)) {
+        document.getElementById("formerror8").innerHTML =
+          "** Enter the Address Properly";
+        document.getElementById("Add").style.borderColor = "red";
+      } else {
+        document.getElementById("formerror8").innerHTML = "";
+        document.getElementById("Add").style.borderColor = "#ccc";
+      }
+    }
+    function showpass() {
+      let a = document.getElementById("Password");
+      if (a.type === "password") {
+        a.type = "text";
+      } else {
+        a.type = "password";
+        console.log(helo);
+      }
+    }
+
+    function showpassConfirmpass() {
+      let a = document.getElementById("C-pass");
+      if (a.type === "password") {
+        a.type = "text";
+      } else {
+        a.type = "password";
+        console.log(helo);
+      }
+    }
+  </script>
+
+  <body>
+    <div class="main">
+      <h1 style="text-align: center">Registration Form</h1>
+      <br />
+      <br />
+
+      <form>
+        <label>First Name :</label>
+        <input
+          type="text"
+          placeholder="First Name"
+          name="fname"
+          id="Firstname"
+        />
+        <p id="formerror" style="color: red; font-size: small"></p>
+
+        <label>Last Name :</label>
+        <input type="text" placeholder="Last Name" name="lname" id="lastname" />
+        <p id="formerror1" style="color: red; font-size: small"></p>
+
+        <label>Date Of Birth :</label>
+        <input type="date" name="Date" id="Datef" />
+        <p id="formerror2" style="color: red; font-size: small"></p>
+
+        <label for="">Email :</label>
+        <input type="text" placeholder="Email ID" name="email" id="Email" />
+        <p id="formerror3" style="color: red; font-size: small"></p>
+
+        <label for="">Password :</label>
+        <input
+          type="Password"
+          placeholder="Password"
+          name="pass"
+          id="Password"
+        />
+        <p id="formerror4" style="color: red; font-size: small"></p>
+        <input type="checkbox" onclick="showpass()" />
+        <label for="" style="font-size: 14px">Show Password</label>
+        <br />
+        <br />
+
+        <label for="">Confirm Password :</label>
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          name="C-pass"
+          id="C-pass"
+        />
+        <p id="formerror5" style="color: red; font-size: small"></p>
+        <input type="checkbox" onclick="showpassConfirmpass()" />
+        <label for="" style="font-size: 14px">Show Password</label>
+        <br />
+        <br />
+
+        <label for="">Age :</label>
+        <input type="number" placeholder="age" name="age" id="age" />
+        <p id="formerror6" style="color: red; font-size: small"></p>
+
+        <label for="">Number:</label>
+        <input type="text" placeholder="number" name="number" id="number" />
+        <p id="formerror7" style="color: red; font-size: small"></p>
+
+        <label for="">Address:</label><br />
+        <input type="text" placeholder="Address" id="Add" maxlength="60" />
+        <p id="formerror8" style="color: red; font-size: small"></p>
+      </form>
+      <br />
+
+      <button onclick="validation()">Submit</button>
+    </div>
+  </body>
+</html>
